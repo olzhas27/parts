@@ -1,14 +1,12 @@
 package ru.javarush.intership.model;
 
 public class Part {
-    private static int count = 0;
-    private int id = count++;
+    private int id;
     private String name;
     private boolean isNeed;
     private int num;
 
     protected Part() {
-
     }
 
     public int getId() {
@@ -25,6 +23,10 @@ public class Part {
 
     public int getNum() {
         return num;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setName(String name) {
