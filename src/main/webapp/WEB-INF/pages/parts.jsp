@@ -20,8 +20,10 @@
             <td>${part.need}</td>
             <td>${part.num}</td>
             <td>
-                <a href="/edit/${part.id}">edit</a>
-                <a href="/delete/${part.id}">delete</a>
+                <c:url value="/edit" var="edit"/>
+                <a href="${edit}/${part.id}">edit</a>
+                <c:url value="/delete" var="delete"/>
+                <a href="${delete}/${part.id}">delete</a>
             </td>
         </tr>
     </c:forEach>

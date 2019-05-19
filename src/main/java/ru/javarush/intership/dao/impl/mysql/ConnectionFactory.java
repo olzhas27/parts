@@ -29,7 +29,6 @@ public class ConnectionFactory {
             ds.setServerTimezone("Europe/Moscow");
         } catch (SQLException e) {
             logger.error("Connection to DB cannot been established", e);
-            throw new RuntimeException(e);
         }
 
     }
@@ -42,4 +41,5 @@ public class ConnectionFactory {
         }
         return ds.getConnection();
     }
+
 }

@@ -10,7 +10,7 @@ import ru.javarush.intership.service.PartsService;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+
 
 public class PartsServiceImpl implements PartsService {
     private static final Logger logger = LoggerFactory.getLogger(PartsServiceImpl.class);
@@ -34,6 +34,16 @@ public class PartsServiceImpl implements PartsService {
             partsDao.add(part);
         } catch (SQLException e) {
             logger.error("Couldn't add part", e);
+        }
+    }
+
+    @Override
+    public int deletePartById(int id){
+        try {
+            return partsDao.deletePartById(id);
+        } catch (SQLException e) {
+            logger.error("Couldn't delete part by id", e);
+            return 0;
         }
     }
 

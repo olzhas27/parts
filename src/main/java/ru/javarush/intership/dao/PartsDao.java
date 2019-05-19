@@ -12,4 +12,6 @@ public interface PartsDao {
     int edit(Part part) throws SQLException;
     int delete(Part part) throws SQLException;
     Part getPartById(int id);
+
+    int deletePartById(int id) throws SQLException;
 }

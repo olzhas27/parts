@@ -10,4 +10,5 @@ public interface PartsService {
     void delete(Part part);
     void edit(Part part);
     Part getById(int id);
+    int deletePartById(int id);
 }
