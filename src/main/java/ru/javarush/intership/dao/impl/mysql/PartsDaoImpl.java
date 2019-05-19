@@ -66,12 +66,9 @@ public class PartsDaoImpl implements PartsDao {
     @Override
     public int edit(Part part) throws SQLException {
         try (PreparedStatement statement = ConnectionFactory.getInstance()
-                .getConnection().prepareStatement("UPDATE PARTS " +
-                        "SET " +
-                        "PART_NAME = ?, " +
-                        "PART_IS_NEED = ? " +
-                        "PART_NUM = ? " +
-                        "WHERE PART_ID = ?")
+                .getConnection().prepareStatement(
+                        "UPDATE PARTS SET PART_NAME = ?, PART_IS_NEED = ?, PART_NUM = ? WHERE PART_ID = ?"
+                )
         ) {
             statement.setString(1, part.getName());
             statement.setBoolean(2, part.isNeed());

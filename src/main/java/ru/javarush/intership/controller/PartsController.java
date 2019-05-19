@@ -19,9 +19,15 @@ public class PartsController {
     @GetMapping(value = "/")
     public ModelAndView allParts() {
         List<Part> parts = partsService.allParts();
+        int minMachinesCount = parts.stream()
+                .filter(Part::isNeed)
+                .mapToInt(Part::getNum)
+                .min()
+                .orElse(0);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("parts");
         modelAndView.addObject("partsList", parts);
+        modelAndView.addObject("machinesCount", minMachinesCount);
         return modelAndView;
     }
 
