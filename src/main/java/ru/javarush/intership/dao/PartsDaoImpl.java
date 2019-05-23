@@ -25,9 +25,25 @@ public class PartsDaoImpl implements PartsDao {
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<Part> getAllParts() {
+    public List<Part> getAllParts(int pageNum) {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("from Part").list();
+        return session.createQuery("from Part")
+                .setFirstResult(10 * (pageNum - 1))
+                .setMaxResults(10)
+                .list();
+    }
+
+    @Override
+    public int getPartsCount() {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("select count(id) from Part", Number.class).getSingleResult().intValue();
+    }
+
+    @Override
+    public int getComputersCount() {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("select min(num) from Part where isNeed = true", Number.class).getFirstResult();
+
     }
 
     @Override

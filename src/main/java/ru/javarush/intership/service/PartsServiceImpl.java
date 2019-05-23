@@ -23,8 +23,20 @@ public class PartsServiceImpl implements PartsService {
 
     @Override
     @Transactional
-    public List<Part> allParts() {
-        return partsDao.getAllParts();
+    public List<Part> allParts(int pageNum) {
+        return partsDao.getAllParts(pageNum);
+    }
+
+    @Override
+    @Transactional
+    public int getPartsCount() {
+        return partsDao.getPartsCount();
+    }
+
+    @Override
+    @Transactional
+    public int getComputersCount() {
+        return partsDao.getComputersCount();
     }
 
     @Override

@@ -21,16 +21,19 @@ public class PartsController {
     }
 
     @GetMapping(value = "/")
-    public ModelAndView allParts() {
-        List<Part> parts = partsService.allParts();
-        int minMachinesCount = parts.stream()
-                .filter(Part::isNeed)
-                .mapToInt(Part::getNum)
-                .min()
-                .orElse(0);
+    public ModelAndView allParts(@RequestParam(name = "page", defaultValue = "1") int pageNum) {
+        List<Part> parts = partsService.allParts(pageNum);
+        int partsCount = partsService.getPartsCount();
+        int pagesCount = (partsCount + 9) / 10;
+
+
+        int minMachinesCount = partsService.getComputersCount();
+
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("parts");
         modelAndView.addObject("partsList", parts);
+        modelAndView.addObject("partsCount", partsCount);
+        modelAndView.addObject("pagesCount", pagesCount);
         modelAndView.addObject("machinesCount", minMachinesCount);
         return modelAndView;
     }

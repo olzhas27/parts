@@ -2,12 +2,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
+<link href="<c:url value="/res/style.css"/>" rel="stylesheet" type="text/css"/>
 <title>PARTS</title>
 </head>
 <body>
 
-<h2>Компьютерные детали</h2>
-<table>
+<table class="parts">
+    <caption>Компьютерные детали</caption>
     <tr>
         <th>Название</th>
         <th>Необходимость</th>
@@ -42,10 +43,20 @@
             <td>компьютеров</td>
             <td></td>
     </tr>
-</table>
 
-<h2>Добавить</h2>
-    <c:url value="/add" var="add"/>
-    <a href="${add}">Добавить новую деталь</a>
+    <tr>
+        <td colspan="7">
+            <c:url value="/add" var="add"/>
+            <a href="${add}">Добавить новую деталь</a>
+
+            <c:forEach begin="${1}" end="${pagesCount}" step="1" varStatus="i">
+                            <c:url value="/" var="url">
+                                <c:param name="page" value="${i.index}"/>
+                            </c:url>
+                            <a href="${url}">${i.index}</a>
+            </c:forEach>
+        </td>
+    </tr>
+</table>
 </body>
 </html>

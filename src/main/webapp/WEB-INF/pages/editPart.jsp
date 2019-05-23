@@ -8,6 +8,7 @@
     <c:if test="${!empty part.name}">
         <title>Edit</title>
     </c:if>
+    <link href="<c:url value="/res/style.css"/>" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <c:if test="${empty part.name}">
@@ -17,7 +18,7 @@
     <c:url value="/edit" var="var"/>
 </c:if>
 
-<form action="${var}" method="POST">
+<form action="${var}" method="POST" class="form_price">
     <c:if test="${!empty part.name}">
             <input type="hidden" name="id" value="${part.id}">
     </c:if>
