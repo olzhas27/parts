@@ -1,12 +1,25 @@
 package ru.javarush.intership.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "parts")
 public class Part {
+    @Id
+    @Column(name = "part_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "part_name")
     private String name;
+
+    @Column(name = "part_is_need")
     private boolean isNeed;
+
+    @Column(name = "part_num")
     private int num;
 
-    protected Part() {
+    public Part() {
     }
 
     public int getId() {

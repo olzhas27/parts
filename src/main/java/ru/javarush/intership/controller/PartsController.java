@@ -1,11 +1,11 @@
 package ru.javarush.intership.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.javarush.intership.model.Part;
 import ru.javarush.intership.service.PartsService;
-import ru.javarush.intership.service.impl.PartsServiceImpl;
 
 import javax.servlet.annotation.WebServlet;
 import java.util.List;
@@ -13,8 +13,12 @@ import java.util.List;
 @WebServlet
 @Controller
 public class PartsController {
-    private PartsService partsService = new PartsServiceImpl();
+    private PartsService partsService;
 
+    @Autowired
+    public void setPartsService(PartsService partsService) {
+        this.partsService = partsService;
+    }
 
     @GetMapping(value = "/")
     public ModelAndView allParts() {
@@ -33,7 +37,7 @@ public class PartsController {
 
     @GetMapping(value = "/delete/{id}")
     public ModelAndView deletePart(@PathVariable("id") int id) {
-        String result = partsService.deletePartById(id) != 0 ? "SUCCESS" : "FAIL";
+        String result = partsService.delete(id) != 0 ? "SUCCESS" : "FAIL";
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect:/");
         return modelAndView;

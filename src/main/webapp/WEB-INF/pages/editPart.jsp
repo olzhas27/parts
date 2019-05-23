@@ -29,7 +29,7 @@
     <input type="checkbox" name="need" id="need" checked="${part.need}">
 
     <label for="num">Количество</label>
-    <input type="text" name="num" id="num" value="${part.num}">
+    <input type="number" name="num" id="num" value="${part.num}">
 
     <c:if test="${empty part.name}">
         <input type="submit" value="Добавить деталь">

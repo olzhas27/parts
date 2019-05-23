@@ -27,3 +27,4 @@ hs_err_pid*
 /library
 /.idea
 *.iml
+package.bat
