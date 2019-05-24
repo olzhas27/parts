@@ -42,7 +42,8 @@ public class PartsDaoImpl implements PartsDao {
     @Override
     public int getComputersCount() {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("select min(num) from Part where isNeed = true", Number.class).getFirstResult();
+        Number result = session.createQuery("select min(num) from Part where isNeed = true", Number.class).getSingleResult();
+        return result != null ? result.intValue() : 0;
 
     }
 
