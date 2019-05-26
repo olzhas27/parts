@@ -12,4 +12,6 @@ public interface PartsService {
     Part getById(int id);
     int getPartsCount();
     int getComputersCount();
+    List<Part> searchPartsByName(int pageNum, String partName);
+    int getFilteredBySearchCount(String partName);
 }

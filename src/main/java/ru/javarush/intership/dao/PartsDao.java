@@ -8,10 +8,20 @@ import java.util.Map;
 
 public interface PartsDao {
     List<Part> getAllParts(int pageNum);
+
     int add(Part part);
+
     int edit(Part part);
+
     int delete(int id);
+
     Part getPartById(int id);
+
     int getPartsCount();
+
     int getComputersCount();
+
+    List<Part> searchPartsByName(int pageNum, String partName);
+
+    int getFilteredBySearchCount(String partName);
 }

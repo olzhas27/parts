@@ -38,6 +38,23 @@ public class PartsController {
         return modelAndView;
     }
 
+    @GetMapping(value = "search")
+    public ModelAndView searchParts(@RequestParam(name = "name", defaultValue = "") String partName,
+                                    @RequestParam(name = "page", defaultValue = "1") int pageNum) {
+        List<Part> parts = partsService.searchPartsByName(pageNum, partName);
+        int partsCount = partsService.getFilteredBySearchCount(partName);
+        int pagesCount = (partsCount + 9) / 10;
+        int minMachinesCount = partsService.getComputersCount();
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("parts");
+        modelAndView.addObject("partsList", parts);
+        modelAndView.addObject("partsCount", partsCount);
+        modelAndView.addObject("pagesCount", pagesCount);
+        modelAndView.addObject("machinesCount", minMachinesCount);
+        return modelAndView;
+    }
+
     @GetMapping(value = "/delete/{id}")
     public ModelAndView deletePart(@PathVariable("id") int id) {
         String result = partsService.delete(id) != 0 ? "SUCCESS" : "FAIL";

@@ -1,5 +1,6 @@
 package ru.javarush.intership.dao;
 
+import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.javarush.intership.model.Part;
@@ -31,6 +32,28 @@ public class PartsDaoImpl implements PartsDao {
                 .setFirstResult(10 * (pageNum - 1))
                 .setMaxResults(10)
                 .list();
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Part> searchPartsByName(int pageNum, String partName) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from Part where name like concat('%',:partName,'%')");
+        query.setParameter("partName", partName);
+        return query
+                .setFirstResult(10 * (pageNum - 1))
+                .setMaxResults(10)
+                .list();
+    }
+
+    @Override
+    public int getFilteredBySearchCount(String partName) {
+        Session session = sessionFactory.getCurrentSession();
+        Number result = session
+                .createQuery("select count(id) from Part where name like concat('%',:partName,'%')", Number.class)
+                .setParameter("partName", partName)
+                .getSingleResult();
+        return  result != null ? result.intValue() : 0;
     }
 
     @Override

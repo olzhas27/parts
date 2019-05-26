@@ -29,6 +29,18 @@ public class PartsServiceImpl implements PartsService {
 
     @Override
     @Transactional
+    public List<Part> searchPartsByName(int pageNum, String partName) {
+        return partsDao.searchPartsByName(pageNum, partName);
+    }
+
+    @Override
+    @Transactional
+    public int getFilteredBySearchCount(String partName) {
+        return partsDao.getFilteredBySearchCount(partName);
+    }
+
+    @Override
+    @Transactional
     public int getPartsCount() {
         return partsDao.getPartsCount();
     }
