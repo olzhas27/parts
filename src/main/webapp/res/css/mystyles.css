@@ -1,0 +1,14 @@
+caption {
+    caption-side: top;
+    text-align: center;
+}
+
+.tableContainer {
+    margin: 20px auto;
+    max-width: 60vw;
+}
+
+.formContainer {
+    margin: 20px auto;
+    max-width: 60vw;
+}
