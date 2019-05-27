@@ -66,19 +66,42 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
                     </a>
                 </td>
         </tr>
-
-        <tr>
-            <td colspan="4" style="text-align: center;">
-
-                <c:forEach begin="${1}" end="${pagesCount}" step="1" varStatus="i">
-                                <c:url value="/" var="url">
-                                    <c:param name="page" value="${i.index}"/>
-                                </c:url>
-                                <a href="${url}">${i.index}</a>
-                </c:forEach>
-            </td>
-        </tr>
     </table>
+</div>
+<div style="text-align: center;">
+    <nav aria-label="All parts nagivation" style="display: inline-block; list-style-type: none;">
+      <ul class="pagination">
+        <c:url value="/" var="url">
+            <c:param name="page" value="${pageNum - 1}"/>
+        </c:url>
+        <li class="page-item <c:if test="${pageNum == 1}">disabled</c:if>">
+          <a class="page-link" href="${url}" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+
+        <c:forEach begin="${1}" end="${pagesCount}" step="1" varStatus="i">
+        <c:url value="/" var="url">
+            <c:param name="page" value="${i.index}"/>
+        </c:url>
+            <li class="page-item <c:if test="${pageNum == i.index}">active</c:if>" <c:if test="${pageNum == i.index}">aria-current="page"</c:if>>
+                <a class="page-link" href="${url}">
+                    ${i.index}
+                    <c:if test="${pageNum == i.index}"><span class="sr-only">(current)</span></c:if>
+                </a>
+            </li>
+        </c:forEach>
+
+        <c:url value="/" var="url">
+            <c:param name="page" value="${pageNum + 1}"/>
+        </c:url>
+        <li class="page-item <c:if test="${pageNum == pagesCount}">disabled</c:if>">
+          <a class="page-link" href="${url}" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
 </div>
 </body>
 </html>

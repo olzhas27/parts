@@ -35,6 +35,7 @@ public class PartsController {
         modelAndView.addObject("partsCount", partsCount);
         modelAndView.addObject("pagesCount", pagesCount);
         modelAndView.addObject("machinesCount", minMachinesCount);
+        modelAndView.addObject("pageNum", pageNum);
         return modelAndView;
     }
 
@@ -52,6 +53,7 @@ public class PartsController {
         modelAndView.addObject("partsCount", partsCount);
         modelAndView.addObject("pagesCount", pagesCount);
         modelAndView.addObject("machinesCount", minMachinesCount);
+        modelAndView.addObject("", partName);
         return modelAndView;
     }
 
