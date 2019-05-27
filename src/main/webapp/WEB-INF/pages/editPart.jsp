@@ -35,7 +35,7 @@
 
     <div>
     <label for="need">Необходимость</label>
-    <input type="checkbox" name="need" id="need" checked="${part.need}">
+    <input type="checkbox" name="need" id="need" <c:if test="${part.need}"> checked </c:if> >
     </div>
 
     <div>
