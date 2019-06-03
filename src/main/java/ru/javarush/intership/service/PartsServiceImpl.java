@@ -17,9 +17,10 @@ public class PartsServiceImpl implements PartsService {
     private PartsDao partsDao;
 
     @Autowired
-    public void setPartsDao(PartsDao partsDao) {
+    public PartsServiceImpl(PartsDao partsDao) {
         this.partsDao = partsDao;
     }
+
 
     @Override
     @Transactional

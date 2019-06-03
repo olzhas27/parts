@@ -16,7 +16,7 @@ public class PartsController {
     private PartsService partsService;
 
     @Autowired
-    public void setPartsService(PartsService partsService) {
+    public PartsController(PartsService partsService) {
         this.partsService = partsService;
     }
 
