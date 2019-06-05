@@ -3,20 +3,20 @@ package ru.javarush.intership.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "parts")
+@Table(name = "PARTS")
 public class Part {
     @Id
-    @Column(name = "part_id")
+    @Column(name = "PART_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "part_name")
+    @Column(name = "PART_NAME")
     private String name;
 
-    @Column(name = "part_is_need")
+    @Column(name = "PART_IS_NEED")
     private boolean isNeed;
 
-    @Column(name = "part_num")
+    @Column(name = "PART_NUM")
     private int num;
 
     public Part() {
