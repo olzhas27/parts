@@ -31,3 +31,4 @@ package.bat
 *.properties
 
 password.txt
+/tomcat*
