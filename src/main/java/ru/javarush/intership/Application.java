@@ -5,6 +5,7 @@ import org.apache.catalina.core.StandardContext;
 import org.apache.catalina.startup.Tomcat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.javarush.intership.utils.ConfigManager;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -28,7 +29,8 @@ public class Application {
 
         logger.debug("webAppDirLocation set to {}", webAppDirLocation);
 
-        final int port = 8080;
+        final int port = ConfigManager.getPort();
+        logger.info("Port set to {}", port);
 
         Tomcat tomcat = new Tomcat();
 
