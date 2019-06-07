@@ -1,6 +1,7 @@
 package ru.javarush.intership.model;
 
 import javax.persistence.*;
+import java.math.BigInteger;
 
 @Entity
 @Table(name = "PARTS")
@@ -17,7 +18,7 @@ public class Part {
     private boolean isNeed;
 
     @Column(name = "PART_NUM")
-    private int num;
+    private BigInteger num;
 
     public Part() {
     }
@@ -34,7 +35,7 @@ public class Part {
         return isNeed;
     }
 
-    public int getNum() {
+    public BigInteger getNum() {
         return num;
     }
 
@@ -50,8 +51,12 @@ public class Part {
         isNeed = need;
     }
 
-    public void setNum(int num) {
+    public void setNum(BigInteger num) {
         this.num = num;
+    }
+
+    public boolean isEmpty() {
+        return name == null || name.isEmpty();
     }
 
     @Override
