@@ -12,11 +12,20 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 
 <div class="tableContainer">
 
-    <form action="search" method="GET">
-        <input name="name" type="text" value="${partName}">
-        <input type="submit" value="Найти">
-    </form>
-
+    <div>
+        <div class="homeButtonContainer">
+            <c:url value="/" var="home"/>
+            <a href="${home}">
+                <img src="<c:url value="/res/images/home.svg"/>" width="30" height="30" title="Главная страница">
+            </a>
+        </div>
+        <div class="searchFormContainer">
+            <form action="search" method="GET">
+                <input name="name" type="text" value="${partName}">
+                <input type="submit" value="Найти">
+            </form>
+        </div>
+    </div>
 
     <table class="table table-bordered table-hover">
         <caption>Компьютерные детали</caption>

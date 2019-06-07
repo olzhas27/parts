@@ -12,3 +12,11 @@ caption {
     margin: 20px auto;
     max-width: 60vw;
 }
+
+.homeButtonContainer {
+    display: inline-block
+}
+
+.searchFormContainer {
+    display: inline-block
+}
