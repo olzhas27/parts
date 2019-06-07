@@ -28,7 +28,7 @@ public class PartsDaoImpl implements PartsDao {
     @SuppressWarnings("unchecked")
     public List<Part> getAllParts(int pageNum) {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("from Part")
+        return session.createQuery("from Part order by name asc, need asc, num desc")
                 .setFirstResult(10 * (pageNum - 1))
                 .setMaxResults(10)
                 .list();
@@ -65,7 +65,7 @@ public class PartsDaoImpl implements PartsDao {
     @Override
     public int getComputersCount() {
         Session session = sessionFactory.getCurrentSession();
-        Number result = session.createQuery("select min(num) from Part where isNeed = true", Number.class).getSingleResult();
+        Number result = session.createQuery("select min(num) from Part where need = true", Number.class).getSingleResult();
         return result != null ? result.intValue() : 0;
 
     }

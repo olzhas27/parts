@@ -15,7 +15,7 @@ public class Part {
     private String name;
 
     @Column(name = "PART_IS_NEED")
-    private boolean isNeed;
+    private boolean need;
 
     @Column(name = "PART_NUM")
     private BigInteger num;
@@ -32,7 +32,7 @@ public class Part {
     }
 
     public boolean isNeed() {
-        return isNeed;
+        return need;
     }
 
     public BigInteger getNum() {
@@ -48,7 +48,7 @@ public class Part {
     }
 
     public void setNeed(boolean need) {
-        isNeed = need;
+        this.need = need;
     }
 
     public void setNum(BigInteger num) {
@@ -64,7 +64,7 @@ public class Part {
         return "Part{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", isNeed=" + isNeed +
+                ", need=" + need +
                 ", num=" + num +
                 '}';
     }
