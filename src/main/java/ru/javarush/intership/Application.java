@@ -22,6 +22,8 @@ public class Application {
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
     public static void main(String[] args) throws Exception {
+        long start = System.currentTimeMillis();
+
         String webAppDirLocation = createTempBaseDir();
 
         logger.debug("webAppDirLocation set to {}", webAppDirLocation);
@@ -40,6 +42,7 @@ public class Application {
         tomcat.init();
         tomcat.start();
 
+        logger.info("APPLICATION STARTED: {} MILLIS", System.currentTimeMillis() - start);
 
         Server server = tomcat.getServer();
 
