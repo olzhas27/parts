@@ -13,7 +13,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 <div class="tableContainer">
 
     <form action="search" method="GET">
-        <input name="name" type="text" value="">
+        <input name="name" type="text" value="${partName}">
         <input type="submit" value="Найти">
     </form>
 
@@ -71,9 +71,21 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 <div style="text-align: center;">
     <nav aria-label="All parts nagivation" style="display: inline-block; list-style-type: none;">
       <ul class="pagination">
-        <c:url value="/" var="url">
-            <c:param name="page" value="${pageNum - 1}"/>
-        </c:url>
+
+      <c:choose>
+        <c:when test="${empty partName}">
+            <c:url value="/" var="url">
+                <c:param name="page" value="${pageNum - 1}"/>
+            </c:url>
+        </c:when>
+        <c:when test="${!empty partName}">
+            <c:url value="/search" var="url">
+                <c:param name="page" value="${pageNum - 1}"/>
+                <c:param name="name" value="${partName}"/>
+            </c:url>
+        </c:when>
+      </c:choose>
+
         <li class="page-item <c:if test="${pageNum == 1}">disabled</c:if>">
           <a class="page-link" href="${url}" aria-label="Previous">
             <span aria-hidden="true">&laquo;</span>
@@ -81,9 +93,21 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
         </li>
 
         <c:forEach begin="${1}" end="${pagesCount}" step="1" varStatus="i">
-        <c:url value="/" var="url">
-            <c:param name="page" value="${i.index}"/>
-        </c:url>
+
+        <c:choose>
+            <c:when test="${empty partName}">
+                <c:url value="/" var="url">
+                    <c:param name="page" value="${i.index}"/>
+                </c:url>
+            </c:when>
+            <c:when test="${!empty partName}">
+                <c:url value="/search" var="url">
+                    <c:param name="page" value="${i.index}"/>
+                    <c:param name="name" value="${partName}"/>
+                </c:url>
+            </c:when>
+        </c:choose>
+
             <li class="page-item <c:if test="${pageNum == i.index}">active</c:if>" <c:if test="${pageNum == i.index}">aria-current="page"</c:if>>
                 <a class="page-link" href="${url}">
                     ${i.index}
@@ -92,9 +116,21 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
             </li>
         </c:forEach>
 
-        <c:url value="/" var="url">
-            <c:param name="page" value="${pageNum + 1}"/>
-        </c:url>
+
+        <c:choose>
+            <c:when test="${empty partName}">
+                <c:url value="/" var="url">
+                    <c:param name="page" value="${pageNum + 1}"/>
+                </c:url>
+            </c:when>
+            <c:when test="${!empty partName}">
+                <c:url value="/search" var="url">
+                    <c:param name="page" value="${pageNum + 1}"/>
+                    <c:param name="name" value="${partName}"/>
+                </c:url>
+            </c:when>
+        </c:choose>
+
         <li class="page-item <c:if test="${pageNum == pagesCount}">disabled</c:if>">
           <a class="page-link" href="${url}" aria-label="Next">
             <span aria-hidden="true">&raquo;</span>
