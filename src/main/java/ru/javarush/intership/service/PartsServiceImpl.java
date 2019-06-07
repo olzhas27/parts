@@ -28,17 +28,20 @@ public class PartsServiceImpl implements PartsService {
         return partsDao.getAllParts(pageNum);
     }
 
+    private String normalize(String str) {
+        return str!= null ? str.trim().replaceAll(" +", " ") : str;
+    }
+
     @Override
     @Transactional
     public List<Part> searchPartsByName(int pageNum, String partName) {
-        String normalize = partName.trim().replaceAll(" +", " ");
-        return partsDao.searchPartsByName(pageNum, normalize);
+        return partsDao.searchPartsByName(pageNum, normalize(partName));
     }
 
     @Override
     @Transactional
     public int getFilteredBySearchCount(String partName) {
-        return partsDao.getFilteredBySearchCount(partName);
+        return partsDao.getFilteredBySearchCount(normalize(partName));
     }
 
     @Override
