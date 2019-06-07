@@ -6,7 +6,10 @@ import org.apache.catalina.startup.Tomcat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -19,7 +22,10 @@ public class Application {
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
     public static void main(String[] args) throws Exception {
-        final String webAppDirLocation = createTempBaseDir();
+        String webAppDirLocation = createTempBaseDir();
+
+        logger.debug("webAppDirLocation set to {}", webAppDirLocation);
+
         final int port = 8080;
 
         Tomcat tomcat = new Tomcat();
@@ -41,11 +47,22 @@ public class Application {
     }
 
     private static String createTempBaseDir() throws IOException, URISyntaxException {
+        URI codeSourcePath = Application.class.getProtectionDomain().getCodeSource().getLocation().toURI();
+        File jarFilePath = new File(codeSourcePath);
+        // Just for run in Intellij Idea
+        if (!jarFilePath.toString().endsWith(".jar")) {
+            return Paths.get("src/main/webapp").toAbsolutePath().toString();
+        } else {
+            return createTempBaseDirFromJar(jarFilePath);
+        }
+
+    }
+
+    private static String createTempBaseDirFromJar(File jarFilePath) throws IOException {
         Path tempDir = Files.createTempDirectory("temp-webapp");
-        File jarFilePath = new File(Application.class.getProtectionDomain().getCodeSource().getLocation().toURI());
         logger.debug("jar file path: {}", jarFilePath.toString());
         try (JarInputStream jis = new JarInputStream(new FileInputStream(jarFilePath))) {
-            ZipEntry entry = null;
+            ZipEntry entry;
             while (null != (entry = jis.getNextEntry())) {
                 if (entry.getName().startsWith("webapp")) {
                     String entryName = entry.getName().replaceAll("webapp", "");
