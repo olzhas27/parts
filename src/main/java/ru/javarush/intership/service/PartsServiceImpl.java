@@ -31,7 +31,8 @@ public class PartsServiceImpl implements PartsService {
     @Override
     @Transactional
     public List<Part> searchPartsByName(int pageNum, String partName) {
-        return partsDao.searchPartsByName(pageNum, partName);
+        String normalize = partName.trim().replaceAll(" +", " ");
+        return partsDao.searchPartsByName(pageNum, normalize);
     }
 
     @Override

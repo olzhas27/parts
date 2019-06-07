@@ -1,5 +1,7 @@
 package ru.javarush.intership.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +15,7 @@ import java.util.List;
 @WebServlet
 @Controller
 public class PartsController {
+    private static final Logger logger = LoggerFactory.getLogger(PartsController.class);
     private PartsService partsService;
 
     @Autowired
@@ -25,7 +28,6 @@ public class PartsController {
         List<Part> parts = partsService.allParts(pageNum);
         int partsCount = partsService.getPartsCount();
         int pagesCount = (partsCount + 9) / 10;
-
 
         int minMachinesCount = partsService.getComputersCount();
 
@@ -42,18 +44,26 @@ public class PartsController {
     @GetMapping(value = "search")
     public ModelAndView searchParts(@RequestParam(name = "name", defaultValue = "") String partName,
                                     @RequestParam(name = "page", defaultValue = "1") int pageNum) {
+        ModelAndView modelAndView = new ModelAndView();
+
+        if (partName == null || partName.isEmpty()) {
+            modelAndView.setViewName("redirect:/");
+            return modelAndView;
+        }
+
+        modelAndView.setViewName("parts");
+
         List<Part> parts = partsService.searchPartsByName(pageNum, partName);
         int partsCount = partsService.getFilteredBySearchCount(partName);
         int pagesCount = (partsCount + 9) / 10;
         int minMachinesCount = partsService.getComputersCount();
 
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("parts");
         modelAndView.addObject("partsList", parts);
         modelAndView.addObject("partsCount", partsCount);
         modelAndView.addObject("pagesCount", pagesCount);
         modelAndView.addObject("machinesCount", minMachinesCount);
-        modelAndView.addObject("", partName);
+        modelAndView.addObject("partName", partName);
+        modelAndView.addObject("pageNum", pageNum);
         return modelAndView;
     }
 
