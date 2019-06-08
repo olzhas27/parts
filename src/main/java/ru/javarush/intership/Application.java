@@ -80,6 +80,7 @@ public class Application {
                     } else {
                         Files.createFile(zipPart);
                         Files.copy(jis, zipPart, StandardCopyOption.REPLACE_EXISTING);
+                        zipPart.toFile().deleteOnExit();
                     }
 
                 }
