@@ -56,7 +56,7 @@ public class Part {
     }
 
     public boolean isEmpty() {
-        return name == null || name.isEmpty();
+        return name == null || name.isEmpty() || num == null;
     }
 
     @Override

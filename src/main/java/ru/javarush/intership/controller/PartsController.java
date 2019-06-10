@@ -89,7 +89,9 @@ public class PartsController {
     public ModelAndView editPart(@ModelAttribute("part") Part part) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect:/");
-        partsService.edit(part);
+        if (!part.isEmpty()) {
+            partsService.edit(part);
+        }
         return modelAndView;
     }
 
