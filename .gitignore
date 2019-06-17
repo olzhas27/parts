@@ -32,3 +32,5 @@ db.properties
 
 password.txt
 /tomcat*
+
+*.sqlite3
