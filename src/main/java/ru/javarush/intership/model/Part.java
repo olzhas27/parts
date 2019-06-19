@@ -1,10 +1,13 @@
 package ru.javarush.intership.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.math.BigInteger;
 
 @Entity
 @Table(name = "PARTS")
+@JsonIgnoreProperties(value = { "empty" })
 public class Part {
     @Id
     @Column(name = "PART_ID")
