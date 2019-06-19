@@ -26,6 +26,14 @@ public class PartsDaoImpl implements PartsDao {
 
     @Override
     @SuppressWarnings("unchecked")
+    public List<Part> getAllParts() {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from Part order by name asc, need asc, num desc")
+                .list();
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
     public List<Part> getAllParts(int pageNum) {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("from Part order by name asc, need asc, num desc")
@@ -53,7 +61,7 @@ public class PartsDaoImpl implements PartsDao {
                 .createQuery("select count(id) from Part where name like concat('%',:partName,'%')", Number.class)
                 .setParameter("partName", partName)
                 .getSingleResult();
-        return  result != null ? result.intValue() : 0;
+        return result != null ? result.intValue() : 0;
     }
 
     @Override
@@ -71,7 +79,7 @@ public class PartsDaoImpl implements PartsDao {
     }
 
     @Override
-    public int add(Part part){
+    public int add(Part part) {
         Session session = sessionFactory.getCurrentSession();
         session.persist(part);
         return 1;

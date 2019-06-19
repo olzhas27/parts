@@ -5,6 +5,7 @@ import ru.javarush.intership.model.Part;
 import java.util.List;
 
 public interface PartsService {
+    List<Part> allParts();
     List<Part> allParts(int pageNum);
     int add(Part part);
     int delete(int id);

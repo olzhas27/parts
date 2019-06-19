@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 public interface PartsDao {
+    List<Part> getAllParts();
+
     List<Part> getAllParts(int pageNum);
 
     int add(Part part);
